@@ -1,0 +1,12 @@
+{
+  "name": "pinar/cms",
+  "description": "Cms Blog Page",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "require": {
+    "symfony/routing": "^5.3"
+  }
+}
