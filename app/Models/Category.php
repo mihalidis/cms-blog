@@ -1,10 +1,11 @@
 <?php
 namespace App\Models;
 
-class Product
+class Category extends Database
 {
     protected $cat_id;
-    protected $cat_title;
+    protected $cat_name;
+
 
     // GET METHODS
 
@@ -19,9 +20,9 @@ class Product
     /**
      * @return mixed
      */
-    public function getCatTitle()
+    public function getCatName()
     {
-        return $this->cat_title;
+        return $this->cat_name;
     }
 
     // SET METHODS
@@ -35,11 +36,11 @@ class Product
     }
 
     /**
-     * @param mixed $cat_title
+     * @param mixed $cat_name
      */
-    public function setCatTitle($cat_title)
+    public function setCatName($cat_name)
     {
-        $this->cat_title = $cat_title;
+        $this->cat_name = $cat_name;
     }
 
     // CRUD OPERATIONS
@@ -48,9 +49,24 @@ class Product
 
     }
 
-    public function findCategory(int $id)
+    public function getAllCategories()
     {
+        $db = $this->connectDb();
+        $query = $db->prepare("SELECT * FROM cms_db.categories");
+        $query->execute();
+        $query = $query->fetchAll();
 
+        return $query;
+    }
+
+    public function getCategoryByName(string $data)
+    {
+        $db = $this->connectDb();
+        $query = $db->prepare("SELECT * FROM cms_db.categories WHERE cat_name=:cat_name");
+        $query->execute(['cat_name' => $data]);
+        $query = $query->fetch();
+
+        return $query;
     }
 
     public function updateCategory(int $id, array $data)
