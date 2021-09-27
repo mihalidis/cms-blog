@@ -29,4 +29,8 @@ class HomeController
         }
         require_once APP_ROOT . '/views/home.php';
     }
+
+    public function homeAction(RouteCollection $routes) {
+        require_once APP_ROOT . '/views/home.php';
+    }
 }
