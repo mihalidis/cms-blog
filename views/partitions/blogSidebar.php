@@ -24,27 +24,17 @@
         <div class="row">
             <div class="col-lg-6">
                 <ul class="list-unstyled">
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
+                    <?php foreach (array_slice($categories, 0, 4) as $category): ?>
+                        <li><a href="#"><?php echo $category["cat_name"]?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <!-- /.col-lg-6 -->
             <div class="col-lg-6">
                 <ul class="list-unstyled">
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
+                    <?php foreach (array_slice($categories, 4, count($categories)) as $category): ?>
+                        <li><a href="#"><?php echo $category["cat_name"]?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <!-- /.col-lg-6 -->
