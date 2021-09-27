@@ -9,7 +9,7 @@ use Symfony\Component\Routing\RouteCollection;
 class HomeController
 {
     // Homepage action
-    public function indexAction(RouteCollection $routes)
+    public function homeAction(RouteCollection $routes)
     {
 
         $category = new Category();
@@ -27,10 +27,6 @@ class HomeController
         } else {
             $posts = $post->getAllPosts();
         }
-        require_once APP_ROOT . '/views/home.php';
-    }
-
-    public function homeAction(RouteCollection $routes) {
         require_once APP_ROOT . '/views/home.php';
     }
 }
