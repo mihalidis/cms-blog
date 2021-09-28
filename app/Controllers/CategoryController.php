@@ -3,13 +3,37 @@
 namespace App\Controllers;
 
 use App\Models\Category;
+use App\Models\Database;
 use Symfony\Component\Routing\RouteCollection;
 
 class CategoryController
 {
-    // Show the product attributes based on the id.
-    public function showAction(RouteCollection $routes)
+    public function categoryAction(RouteCollection $routes)
     {
-        require_once APP_ROOT . '/views/post.php';
+        $db = new Database();
+        $category = new Category();
+
+        $categories = $category->getAllCategories($db->connectDb());
+
+        if(isset($_POST["catSubmit"])) {
+            $category->setCatName($_POST["categoryName"]);
+            unset($_POST);
+            if($category->getCatName() == "" || empty($category->getCatName())) {
+                $showed_alert = "This field should not be empty!";
+            } else {
+                $cat_create_result = $category->createCategory($category->getCatName(),$db->connectDb());
+                $showed_alert = $cat_create_result;
+            }
+        }
+
+        require_once APP_ROOT . '/views/admin-categories.php';
+    }
+
+    public function deleteAction(RouteCollection $routes)
+    {
+        $db = new Database();
+        $category = new Category();
+
+        require_once APP_ROOT . '/views/admin-categories.php';
     }
 }

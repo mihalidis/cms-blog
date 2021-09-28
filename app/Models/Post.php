@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Post extends Database
+class Post
 {
     protected $post_id;
     protected $post_category_id;
@@ -178,14 +178,13 @@ class Post extends Database
     }
 
     // CRUD OPERATIONS
-    public function createPost(array $data)
+    public function createPost(array $data,object $db)
     {
 
     }
 
-    public function getAllPosts()
+    public function getAllPosts(object $db)
     {
-        $db = $this->connectDb();
         $query = $db->prepare("SELECT * FROM cms_db.posts");
         $query->execute();
         $query = $query->fetchAll();
@@ -194,9 +193,8 @@ class Post extends Database
 
     }
 
-    public function getPostsByCategoryID(int $catID)
+    public function getPostsByCategoryID(int $catID,object $db)
     {
-        $db = $this->connectDb();
         $query = $db->prepare("SELECT * FROM cms_db.posts WHERE post_category_id=:category_id");
         $query->execute(["category_id" => $catID]);
         $query = $query->fetchAll();
@@ -205,12 +203,12 @@ class Post extends Database
 
     }
 
-    public function updatePost(int $id, array $data)
+    public function updatePost(int $id, array $data,object $db)
     {
 
     }
 
-    public function deletePost(int $id)
+    public function deletePost(int $id,object $db)
     {
 
     }

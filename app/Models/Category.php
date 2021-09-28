@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Category extends Database
+class Category
 {
     protected $cat_id;
     protected $cat_name;
@@ -44,14 +44,21 @@ class Category extends Database
     }
 
     // CRUD OPERATIONS
-    public function createCategory(array $data)
+    public function createCategory(string $data,object $db)
     {
+        $this->cat_name = $data;
 
+        $query = $db->prepare("INSERT INTO cms_db.categories SET cat_name = :cat_name");
+        $insert = $query->execute(["cat_name" => $this->cat_name]);
+        if ( $insert ){
+            return "category created successfully!";
+        } else {
+            return "category can't created right now, please try again!";
+        }
     }
 
-    public function getAllCategories()
+    public function getAllCategories(object $db)
     {
-        $db = $this->connectDb();
         $query = $db->prepare("SELECT * FROM cms_db.categories");
         $query->execute();
         $query = $query->fetchAll();
@@ -59,9 +66,8 @@ class Category extends Database
         return $query;
     }
 
-    public function getCategoryByName(string $data)
+    public function getCategoryByName(string $data,object $db)
     {
-        $db = $this->connectDb();
         $query = $db->prepare("SELECT * FROM cms_db.categories WHERE cat_name=:cat_name");
         $query->execute(['cat_name' => $data]);
         $query = $query->fetch();
@@ -74,8 +80,11 @@ class Category extends Database
 
     }
 
-    public function deleteCategory(int $id)
+    public function deleteCategory(int $id,object $db)
     {
+        die(var_dump("I'm Here"));
+        $query = $db->prepare("DELETE FROM categories WHERE cat_id = :cat_id");
+        $query->execute(['cat_id' => $id]);
 
     }
 }

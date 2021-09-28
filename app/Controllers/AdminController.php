@@ -15,6 +15,6 @@ class AdminController
     // Homepage action
     public function categoriesAction(RouteCollection $routes)
     {
-        require_once APP_ROOT . '/views/admin/categories.php';
+        require_once APP_ROOT . '/views/admin/admin-categories.php';
     }
 }
