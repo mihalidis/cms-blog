@@ -29,11 +29,4 @@ class CategoryController
         require_once APP_ROOT . '/views/admin-categories.php';
     }
 
-    public function deleteAction(RouteCollection $routes)
-    {
-        $db = new Database();
-        $category = new Category();
-
-        require_once APP_ROOT . '/views/admin-categories.php';
-    }
 }

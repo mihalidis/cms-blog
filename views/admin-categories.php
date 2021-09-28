@@ -44,7 +44,7 @@
                                 <tr>
                                     <td><?php echo $category["cat_id"] ?></td>
                                     <td><?php echo $category["cat_name"] ?></td>
-                                    <td><a href="<?php echo 'admin-categories?delete='.$category["cat_id"] ?>" ><span data-feather="trash-2"></span></a></td>
+                                    <td><a href="<?php echo str_replace('{id}', $category["cat_id"], $routes->get('categoryDelete')->getPath()) ?>" ><span data-feather="trash-2"></span></a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
