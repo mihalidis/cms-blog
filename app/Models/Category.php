@@ -82,8 +82,7 @@ class Category
 
     public function deleteCategory(int $id,object $db)
     {
-        die(var_dump("I'm Here"));
-        $query = $db->prepare("DELETE FROM categories WHERE cat_id = :cat_id");
+        $query = $db->prepare("DELETE FROM cms_db.categories WHERE cat_id = :cat_id");
         $query->execute(['cat_id' => $id]);
 
     }

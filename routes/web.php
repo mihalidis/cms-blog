@@ -11,4 +11,4 @@ $routes->add('admin', new Route(constant('URL_SUBFOLDER') . '/admin', array('con
 
 $routes->add('category', new Route(constant('URL_SUBFOLDER') . '/admin-categories', array('controller' => 'CategoryController', 'method'=>'categoryAction'), array()));
 
-$routes->add('categoryDelete', new Route(constant('URL_SUBFOLDER') . '/admin-categories?delete={id}', array('controller' => 'CategoryController', 'method'=>'categoryAction'), array('id' => '[0-9]+')));
+$routes->add('categoryDelete', new Route(constant('URL_SUBFOLDER') . '/admin-categories?delete={id}', array('controller' => 'CategoryController', 'method'=>'deleteAction'), array('id' => '[0-9]+')));
