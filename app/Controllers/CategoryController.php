@@ -34,7 +34,24 @@ class CategoryController
         $db = new Database();
         $category = new Category();
         $categories = $category->getAllCategories($db->connectDb());
-        $category->deleteCategory($id,$db->connectDb());
+
+        $showed_alert = $category->deleteCategory($id,$db->connectDb());
+
+        require_once APP_ROOT . '/views/admin-categories.php';
+    }
+
+    public function updateAction($id, RouteCollection $routes) {
+
+        $db = new Database();
+        $category = new Category();
+        $categories = $category->getAllCategories($db->connectDb());
+
+        $selected_cat = $category->getCategoryById($id,$db->connectDb());
+
+        if(isset($_POST["catUpdate"]) && isset($selected_cat)) {
+            $selected_cat->setCatName($_POST["updatedCategoryInput"]);
+            $update_alert = $category->updateCategory($selected_cat,$db->connectDb());
+        }
 
         require_once APP_ROOT . '/views/admin-categories.php';
     }

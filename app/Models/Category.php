@@ -75,15 +75,37 @@ class Category
         return $query;
     }
 
-    public function updateCategory(int $id, array $data)
+    public function getCategoryById(int $id,object $db)
     {
+        $query = $db->prepare("SELECT * FROM cms_db.categories WHERE cat_id=:cat_id");
+        $query->execute(['cat_id' => $id]);
+        $query = $query->fetch();
 
+        $this->cat_id = $query["cat_id"];
+        $this->cat_name = $query["cat_name"];
+
+        return $this;
+    }
+
+    public function updateCategory(object $data, object $db)
+    {
+        $query = $db->prepare("UPDATE cms_db.categories SET cat_name = :cat_name WHERE cat_id = :cat_id");
+        $update = $query->execute(['cat_name' => $data->getCatName(), 'cat_id' => $data->getCatId()]);
+        if ($update) {
+            return "Update successfull!!";
+        } else {
+            return "Update failed!!";
+        }
     }
 
     public function deleteCategory(int $id,object $db)
     {
         $query = $db->prepare("DELETE FROM cms_db.categories WHERE cat_id = :cat_id");
-        $query->execute(['cat_id' => $id]);
-
+        $delete = $query->execute(['cat_id' => $id]);
+        if ($delete) {
+            return "Category deleted!!";
+        } else {
+            return "Can't delete..try again..!!";
+        }
     }
 }
